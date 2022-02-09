@@ -13,7 +13,7 @@ export default function SongDetails() {
       .get(`${URL}/songs/${id}`)
       .then((response) => setSong(response.data))
       .catch((error) => console.warn(error));
-  }, [id]);
+  }, [URL, id]);
 
   const handleDelete = () => {
     axios
@@ -29,14 +29,13 @@ export default function SongDetails() {
   };
 
   return (
-    <article>
-      <h4>{song.name}</h4>
-      <p>{song.artist}</p>
-      <p>{song.album}</p>
-      <p>{song.time}</p>
-      <p>{song.is_favorite && <p>yes</p>}</p>
-
-      <div>
+    <article className="details">
+      <h4>Name: {song.name}</h4>
+      <p>Artist: {song.artist}</p>
+      <p>Album: {song.album}</p>
+      <p>Song Length: {song.time}</p>
+      <p>{song.is_favorite && <p>Favorite: yes</p>}</p>
+      <div className="buttonDiv">
         <div>
           <Link to="/songs">
             <button>Back</button>

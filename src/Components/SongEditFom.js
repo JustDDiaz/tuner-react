@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+const URL = process.env.REACT_APP_API_URL;
 
 export default function SongEditForm() {
   const { id } = useParams();
-  const URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
 
   const [song, setSong] = useState({
@@ -17,7 +17,7 @@ export default function SongEditForm() {
 
   useEffect(() => {
     axios.get(`${URL}/songs/${id}`).then((response) => setSong(response.data));
-  }, []);
+  }, [id]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -60,7 +60,7 @@ export default function SongEditForm() {
             type="text"
             onChange={handleTextChange}
           />
-          <label htmlFor="time">Time</label>
+          <label htmlFor="time">Song Length</label>
           <input
             id="time"
             value={song.time}
